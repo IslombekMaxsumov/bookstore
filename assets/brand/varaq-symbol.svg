@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Varaq">
+  <!-- A page with a folded corner and a bookmark ribbon; the ribbon's notch is a "V". -->
+  <path d="M9 3h22l8 8v33H9z" fill="#20211F"/>
+  <path d="M31 3v8h8z" fill="#DFDDD5"/>
+  <path d="M27 21h7M27 26.5h7M27 32h4.5" stroke="#F7F5F0" stroke-width="2.2" stroke-linecap="square"/>
+  <path d="M14 3h8v45l-4-5-4 5z" fill="#E34D35"/>
+</svg>

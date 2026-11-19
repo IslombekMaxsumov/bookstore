@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Varaq</title>
   <meta name="description" content="">
-  <meta name="theme-color" content="#f3f6fb">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f7f5f0">
+  <link rel="icon" href="assets/brand/varaq-favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Roboto+Slab:wght@500;600;700&display=swap">
   <script>
     window.APP_NS = "bookstore";
     try {
@@ -37,7 +40,12 @@
       </button>
 
       <aside id="filters" class="filters" aria-labelledby="filtersTitle">
-        <h2 id="filtersTitle" class="filters-title" data-i18n="filters.title"></h2>
+        <div class="filters-head">
+          <h2 id="filtersTitle" class="filters-title" data-i18n="filters.title"></h2>
+          <button type="button" id="filtersClose" class="icon-btn filters-close" data-i18n-aria="filters.close">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
         <form id="filterForm" class="filter-form" novalidate>
           <div class="field">
             <label for="q" data-i18n="filters.search"></label>
@@ -82,9 +90,14 @@
             </div>
           </fieldset>
 
-          <button type="button" id="clearFilters" class="btn btn-ghost" data-i18n="filters.clear"></button>
+          <div class="filters-foot">
+            <button type="button" id="filtersShow" class="btn btn-block filters-show"></button>
+            <button type="button" id="clearFilters" class="btn btn-ghost btn-block" data-i18n="filters.clear"></button>
+          </div>
         </form>
       </aside>
+
+      <div id="filtersBackdrop" class="filters-backdrop" hidden></div>
 
       <section class="results" aria-labelledby="resultsCount">
         <div class="results-bar">

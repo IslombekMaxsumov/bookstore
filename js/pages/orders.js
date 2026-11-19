@@ -24,8 +24,13 @@
       el("header", { class: "order-head" },
         el("h2", { id: headingId, text: t("orders.number", { number: order.id }) }),
         el("p", { class: "order-date", text: t("orders.placed", { date: Site.formatDate(new Date(order.placedAt), { year: true, time: true }) }) }),
-        el("p", { class: "status status-" + status, text: t("status." + status) })
+        // Status is shown by text and an icon, not only by colour.
+        el("p", { class: "status status-" + status },
+          Site.icon({ processing: "clock", shipping: "truck", delivered: "check", cancelled: "ban" }[status], 16),
+          el("span", { text: t("status." + status) })
+        )
       ),
+      el("div", { class: "order-body" },
       el("ul", { class: "mini-lines" },
         order.items.map((it) => {
           const book = Shop.book(it.id);
@@ -44,6 +49,7 @@
           order.discount ? [t("cart.discount", { code: order.code }), "−" + Shop.price(order.discount)] : null,
           [t("cart.total"), Shop.price(order.total)],
         ].filter(Boolean).map(([term, value]) => el("div", null, el("dt", { text: term }), el("dd", { text: value })))
+      )
       ),
       el("div", { class: "order-actions" },
         el("button", { type: "button", class: "btn btn-ghost", text: t("orders.again"), onclick: () => buyAgain(order) }),

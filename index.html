@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Varaq</title>
   <meta name="description" content="">
-  <meta name="theme-color" content="#f3f6fb">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f7f5f0">
+  <link rel="icon" href="assets/brand/varaq-favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Roboto+Slab:wght@500;600;700&display=swap">
   <!-- Apply the saved theme before the page is drawn, so it never flashes. -->
   <script>
     window.APP_NS = "bookstore";
@@ -30,13 +33,19 @@
 
   <main id="main" tabindex="-1">
     <section class="hero">
-      <div class="container hero-inner">
-        <h1 data-i18n="home.heroTitle"></h1>
-        <p id="heroText" class="hero-text"></p>
-        <div class="hero-actions">
-          <a class="btn" href="catalog.html" data-i18n="home.browse"></a>
-          <a class="btn btn-ghost" href="catalog.html?sale=1" data-i18n="home.seeSale"></a>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="folio" aria-hidden="true">01 / 07</p>
+          <p class="eyebrow" data-i18n="home.eyebrow"></p>
+          <h1 class="display hero-title" data-i18n="home.heroTitle"></h1>
+          <p id="heroText" class="hero-text"></p>
+          <div class="hero-actions">
+            <a class="btn" href="catalog.html" data-i18n="home.browse"></a>
+            <a class="btn btn-ghost" href="catalog.html?sale=1" data-i18n="home.seeSale"></a>
+          </div>
         </div>
+        <!-- A composition of real covers (decorative: the books are listed below). -->
+        <div id="heroArt" class="hero-art" aria-hidden="true"></div>
       </div>
     </section>
 
@@ -46,42 +55,63 @@
     </section>
 
     <section class="container section" aria-labelledby="catsTitle">
-      <h2 id="catsTitle" data-i18n="home.cats"></h2>
+      <div class="section-head">
+        <p class="sec-no" aria-hidden="true">p. 02</p>
+        <h2 id="catsTitle" data-i18n="home.cats"></h2>
+      </div>
       <ul id="cats" class="cat-grid"></ul>
     </section>
 
     <section class="container section" aria-labelledby="bestTitle">
       <div class="section-head">
+        <p class="sec-no" aria-hidden="true">p. 03</p>
         <h2 id="bestTitle" data-i18n="home.best"></h2>
-        <a href="catalog.html?sort=popular" aria-describedby="bestTitle" data-i18n="home.seeAll"></a>
+        <a class="see-all" href="catalog.html?sort=popular" aria-describedby="bestTitle" data-i18n="home.seeAll"></a>
       </div>
       <div id="best"></div>
     </section>
 
     <section class="container section" aria-labelledby="newTitle">
       <div class="section-head">
+        <p class="sec-no" aria-hidden="true">p. 04</p>
         <h2 id="newTitle" data-i18n="home.new"></h2>
-        <a href="catalog.html?sort=newest" aria-describedby="newTitle" data-i18n="home.seeAll"></a>
+        <a class="see-all" href="catalog.html?sort=newest" aria-describedby="newTitle" data-i18n="home.seeAll"></a>
       </div>
       <div id="new"></div>
     </section>
 
-    <section class="container section promo" aria-labelledby="promoTitle">
-      <h2 id="promoTitle" data-i18n="home.promoTitle"></h2>
-      <p id="promoText"></p>
+    <section class="container section" aria-labelledby="promoTitle">
+      <div class="promo">
+        <p class="promo-big display" aria-hidden="true">−10%</p>
+        <div class="promo-copy">
+          <p class="eyebrow promo-eyebrow" data-i18n="home.promoEyebrow"></p>
+          <h2 id="promoTitle" class="display" data-i18n="home.promoTitle"></h2>
+          <p id="promoText"></p>
+        </div>
+        <div class="promo-code">
+          <span class="coupon tabular" id="promoCode">KITOB10</span>
+          <button type="button" id="copyCode" class="btn btn-small promo-copy-btn" data-i18n="home.copyCode"></button>
+        </div>
+      </div>
     </section>
 
-    <section class="container section" aria-labelledby="saleTitle">
-      <div class="section-head">
-        <h2 id="saleTitle" data-i18n="home.sale"></h2>
-        <a href="catalog.html?sale=1" aria-describedby="saleTitle" data-i18n="home.seeAll"></a>
+    <section class="band-sale" aria-labelledby="saleTitle">
+      <div class="container section">
+        <div class="section-head">
+          <p class="sec-no" aria-hidden="true">p. 05</p>
+          <h2 id="saleTitle" data-i18n="home.sale"></h2>
+          <a class="see-all" href="catalog.html?sale=1" aria-describedby="saleTitle" data-i18n="home.seeAll"></a>
+        </div>
+        <div id="sale"></div>
       </div>
-      <div id="sale"></div>
     </section>
 
     <section id="recentSection" class="container section" aria-labelledby="recentTitle" hidden>
-      <h2 id="recentTitle" data-i18n="home.recent"></h2>
-      <div id="recent"></div>
+      <div class="section-head">
+        <p class="sec-no" aria-hidden="true">p. 06</p>
+        <h2 id="recentTitle" data-i18n="home.recent"></h2>
+      </div>
+      <ul id="recent" class="recent-strip"></ul>
     </section>
   </main>
 

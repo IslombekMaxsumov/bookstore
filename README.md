@@ -32,4 +32,9 @@ Demo promo codes: `KITOB10` (10% off), `TALABA15` (15% off from 150 000 so'm), `
 
 Run locally with any static server, for example `node ../_shared/serve.mjs . 5175`.
 
-Book covers are drawn with CSS (real cover images are copyrighted).
+## Design
+- Brand: logo files in `assets/brand/` (a page with a folded corner and a bookmark ribbon whose notch is a "V"; the ribbon is also the tail of the "q" in the wordmark).
+- Colours: warm paper, deep ink, vermilion (tokens in `css/base.css`, some darkened to pass WCAG AA; the original values are noted there).
+- Fonts: Roboto Slab (headlines) and Manrope (everything else), both with Cyrillic.
+- Signature detail: every page carries a page number like a printed book ("02 / 07"), and sections and checkout steps are numbered.
+- Real covers for 26 of the 30 books, stored locally in `assets/covers/` (sources in `assets/covers/SOURCES.md`). The other 4 show a plain typographic cover.

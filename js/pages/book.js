@@ -12,6 +12,7 @@
   function notFound() {
     view.replaceChildren(
       el("div", { class: "empty" },
+        Site.emptyArt(),
         el("h1", { text: t("book.notFound") }),
         el("p", { text: t("book.notFoundText") }),
         el("a", { class: "btn", href: "catalog.html", text: t("book.back") })
@@ -102,8 +103,9 @@
       ),
 
       el("div", { class: "book-layout" },
-        el("div", { class: "book-cover" }, Site.cover(book, "lg")),
+        el("div", { class: "book-cover" }, Site.cover(book, "lg", t("book.coverAlt", { title }))),
         el("div", { class: "book-info" },
+          Site.folio(),
           Site.tags(book),
           el("h1", { class: "book-title", text: title }),
           el("p", { class: "book-author", text: Shop.author(book) }),
@@ -152,7 +154,7 @@
       ),
 
       el("section", { class: "section", "aria-labelledby": "similarTitle" },
-        el("h2", { id: "similarTitle", text: t("book.similar") }),
+        el("div", { class: "section-head" }, el("h2", { id: "similarTitle", text: t("book.similar") })),
         Site.bookGrid(similar, "book-row")
       )
     );

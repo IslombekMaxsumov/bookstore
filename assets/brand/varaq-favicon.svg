@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Simplified symbol for browser tabs: no text lines, on a dark tile. -->
+  <rect width="32" height="32" rx="7" fill="#20211F"/>
+  <path d="M7 5h13l5 5v17H7z" fill="#F7F5F0"/>
+  <path d="M20 5v5h5z" fill="#A5A79F"/>
+  <path d="M10.5 5h5v24l-2.5-3-2.5 3z" fill="#E34D35"/>
+</svg>

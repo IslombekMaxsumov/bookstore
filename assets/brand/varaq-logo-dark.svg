@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226 64" role="img" aria-label="Varaq">
+  <!-- Dark-background version: paper-coloured page and letters, brighter ribbon. -->
+  <g transform="translate(0 2) scale(1.25)">
+    <path d="M9 3h22l8 8v33H9z" fill="#F3F0E9"/>
+    <path d="M31 3v8h8z" fill="#A5A79F"/>
+    <path d="M27 21h7M27 26.5h7M27 32h4.5" stroke="#171918" stroke-width="2.2" stroke-linecap="square"/>
+    <path d="M14 3h8v45l-4-5-4 5z" fill="#FF7057"/>
+  </g>
+  <g transform="translate(66 2)" fill="#F3F0E9">
+    <path d="M0 4h8.4l8.6 28 8.6-28H34L21.4 44h-8.8z"/>
+    <circle cx="52" cy="30" r="10.5" fill="none" stroke="#F3F0E9" stroke-width="7"/>
+    <rect x="59" y="16" width="7" height="28"/>
+    <rect x="73" y="16" width="7" height="28"/>
+    <path d="M76.5 33c0-9 4.5-13.5 13.5-13.5" fill="none" stroke="#F3F0E9" stroke-width="7"/>
+    <circle cx="107" cy="30" r="10.5" fill="none" stroke="#F3F0E9" stroke-width="7"/>
+    <rect x="114" y="16" width="7" height="28"/>
+    <circle cx="141" cy="30" r="10.5" fill="none" stroke="#F3F0E9" stroke-width="7"/>
+    <rect x="148" y="16" width="7" height="28"/>
+    <path d="M148 44h7v16l-3.5-4.5L148 60z" fill="#FF7057"/>
+  </g>
+</svg>

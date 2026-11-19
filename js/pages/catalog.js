@@ -129,6 +129,7 @@
       ? t("results.paged", { count: list.length, page: state.page, pages })
       : t("results", { count: list.length });
     $("grid").replaceChildren(shown.length ? Site.bookGrid(shown) : "");
+    $("filtersShow").textContent = t("filters.show", { count: list.length });
     $("empty").hidden = list.length > 0;
 
     const n = activeFilters();
@@ -200,11 +201,48 @@
   $("clearFilters").addEventListener("click", clearAll);
   $("emptyClear").addEventListener("click", clearAll);
 
-  // On phones the filters are folded away behind a button.
-  $("filtersToggle").addEventListener("click", () => {
-    const open = $("filtersToggle").getAttribute("aria-expanded") !== "true";
+  // Phones and tablets: the filters are a drawer that slides in from the left.
+  // Escape, the × button, the backdrop or "Show N books" close it, and focus
+  // goes back to the Filters button.
+  const drawerMedia = matchMedia("(max-width: 1023px)");
+  function setDrawer(open) {
     $("filtersToggle").setAttribute("aria-expanded", String(open));
     document.querySelector(".catalog").classList.toggle("filters-open", open);
+    $("filtersBackdrop").hidden = !open;
+    document.body.style.overflow = open ? "hidden" : "";
+    const panel = $("filters");
+    if (open) {
+      panel.setAttribute("role", "dialog");
+      panel.setAttribute("aria-modal", "true");
+      $("filtersClose").focus();
+    } else {
+      panel.removeAttribute("role");
+      panel.removeAttribute("aria-modal");
+    }
+  }
+  const closeDrawer = () => {
+    if ($("filtersToggle").getAttribute("aria-expanded") !== "true") return;
+    setDrawer(false);
+    $("filtersToggle").focus();
+  };
+  $("filtersToggle").addEventListener("click", () => setDrawer(true));
+  $("filtersClose").addEventListener("click", closeDrawer);
+  $("filtersShow").addEventListener("click", closeDrawer);
+  $("filtersBackdrop").addEventListener("click", closeDrawer);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDrawer();
+    // Keep Tab inside the open drawer.
+    if (e.key === "Tab" && drawerMedia.matches && $("filtersToggle").getAttribute("aria-expanded") === "true") {
+      const items = [...$("filters").querySelectorAll("button, input, select, a[href]")].filter((n) => !n.disabled && n.offsetParent);
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  // Rotating to a wide screen: the drawer becomes the normal sidebar.
+  drawerMedia.addEventListener("change", (e) => {
+    if (!e.matches) setDrawer(false);
   });
 
   // Back/forward buttons move between result pages.

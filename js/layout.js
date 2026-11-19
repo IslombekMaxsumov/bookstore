@@ -51,6 +51,8 @@
     arrowRight: '<path d="M5 12h14M12 5l7 7-7 7"/>',
     filter: '<path d="M22 3H2l8 9.46V19l4 2v-8.54z"/>',
     check: '<path d="M20 6 9 17l-5-5"/>',
+    clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+    ban: '<circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/>',
   };
   function icon(name, size = 20) {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -79,6 +81,37 @@
     if (year) opts.year = "numeric";
     const s = Core.formatDate(date, opts);
     return time ? s + ", " + hhmm : s;
+  }
+
+  /* ---------- logo ----------
+     The real logo files (assets/brand). Both are in the page and CSS shows
+     the one that fits the theme. */
+  function logo(cls) {
+    return el("a", { class: cls, href: "index.html" },
+      el("img", { class: "logo-light", src: "assets/brand/varaq-logo.svg", alt: "Varaq", width: 113, height: 32 }),
+      el("img", { class: "logo-dark", src: "assets/brand/varaq-logo-dark.svg", alt: "Varaq", width: 113, height: 32 })
+    );
+  }
+
+  /* ---------- page numbers ----------
+     Varaq means "a page", so each of the 7 pages carries a folio like a printed
+     page: "02 / 07". */
+  const PAGES = ["home", "catalog", "book", "cart", "checkout", "wishlist", "orders"];
+  const folioText = (name = page) => String(PAGES.indexOf(name) + 1).padStart(2, "0") + " / " + String(PAGES.length).padStart(2, "0");
+  const folio = (extra = "") => el("p", { class: "folio " + extra, "aria-hidden": "true", text: folioText() });
+
+  // Small drawing for empty states: a blank page with the Varaq ribbon.
+  const EMPTY_ART =
+    '<svg viewBox="0 0 120 96" width="120" height="96" aria-hidden="true" focusable="false">' +
+    '<path d="M30 14h44l14 14v58H30z" fill="var(--raised)" stroke="var(--line-strong)" stroke-width="1.5"/>' +
+    '<path d="M22 8h44l14 14v58H22z" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>' +
+    '<path d="M66 8v14h14" fill="var(--raised)" stroke="var(--ink)" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M36 40h30M36 48h30M36 56h18" stroke="var(--line-strong)" stroke-width="2.5" stroke-linecap="round"/>' +
+    '<path d="M30 8h9v80l-4.5-6-4.5 6z" fill="var(--brand)"/></svg>';
+  function emptyArt() {
+    const box = el("div", { class: "empty-art" });
+    box.innerHTML = EMPTY_ART; // fixed drawing written here, no user data
+    return box;
   }
 
   /* ---------- header ---------- */
@@ -125,10 +158,7 @@
 
     host.append(
       el("div", { class: "container header-bar" },
-        el("a", { class: "brand", href: "index.html" },
-          el("span", { class: "brand-mark" }, icon("book", 18)),
-          el("span", { "data-i18n": "brand" })
-        ),
+        logo("brand"),
         nav,
         search,
         el("div", { class: "header-tools" },
@@ -179,39 +209,60 @@
       ["page.home", "index.html"], ["page.catalog", "catalog.html"], ["page.cart", "cart.html"],
       ["page.wishlist", "wishlist.html"], ["page.orders", "orders.html"],
     ];
+    // Column headings are numbered like chapters: 01, 02, 03.
+    const heading = (id, n, key) => el("h2", { id }, el("span", { class: "foot-num", "aria-hidden": "true", text: n }), el("span", { "data-i18n": key }));
     host.append(
       el("div", { class: "container footer-grid" },
         el("div", { class: "footer-about" },
-          el("p", { class: "brand" }, el("span", { class: "brand-mark" }, icon("book", 18)), el("span", { "data-i18n": "brand" })),
-          el("p", { "data-i18n": "footer.note" }),
-          el("p", { "data-i18n": "footer.saved" })
+          logo("footer-logo"),
+          el("p", { class: "footer-tagline", "data-i18n": "footer.tagline" })
         ),
         el("nav", { "aria-labelledby": "footShop" },
-          el("h2", { id: "footShop", "data-i18n": "footer.shop" }),
+          heading("footShop", "01", "footer.shop"),
           el("ul", null, links.map(([key, href]) => el("li", null, el("a", { href, "data-i18n": key }))))
         ),
         el("nav", { "aria-labelledby": "footCats" },
-          el("h2", { id: "footCats", "data-i18n": "footer.cats" }),
+          heading("footCats", "02", "footer.cats"),
           el("ul", null, Shop.CATEGORIES.map((c) =>
             el("li", null, el("a", { href: "catalog.html?cat=" + c, "data-i18n": "cat." + c }))
           ))
+        ),
+        el("section", { "aria-labelledby": "footAbout" },
+          heading("footAbout", "03", "footer.about"),
+          el("p", { "data-i18n": "footer.note" }),
+          el("p", { "data-i18n": "footer.saved" })
         )
       ),
-      el("p", { class: "container footer-copy", "data-i18n": "footer.copy" })
+      el("div", { class: "container footer-bottom" },
+        el("p", { "data-i18n": "footer.copy" }),
+        el("p", { class: "footer-folio", "aria-hidden": "true", text: "Varaq — " + folioText() })
+      )
     );
   }
 
   /* ---------- book pieces ---------- */
-  // A drawn cover (real cover images are copyrighted). Decorative: the title is
-  // always shown as text next to it.
-  function cover(book, size = "md") {
-    return el("div", {
-      class: "cover cover-" + size, "aria-hidden": "true",
-      vars: { "--c1": book.colors[0], "--c2": book.colors[1] },
-    },
-      el("span", { class: "cover-title", text: Shop.title(book) }),
-      el("span", { class: "cover-author", text: Shop.author(book) })
+  // The real cover (a local image), shown whole inside a 2:3 frame. If a book
+  // has no cover image, or it fails to load, a plain typographic cover is shown.
+  // alt is empty when the title is written right next to the cover anyway.
+  function fallbackCover(book) {
+    return el("div", { class: "cover-fallback" },
+      el("span", { class: "cf-author", text: Shop.author(book) }),
+      el("span", { class: "cf-title", text: Shop.title(book) }),
+      el("img", { class: "cf-mark", src: "assets/brand/varaq-symbol.svg", alt: "", width: 20, height: 20 })
     );
+  }
+  function cover(book, size = "md", alt = "", eager = false) {
+    const frame = el("div", { class: "cover cover-" + size });
+    if (!book.cover) {
+      frame.append(fallbackCover(book));
+      if (alt) frame.setAttribute("role", "img"), frame.setAttribute("aria-label", alt);
+      else frame.setAttribute("aria-hidden", "true");
+      return frame;
+    }
+    const img = el("img", { src: book.cover, alt, loading: size === "lg" || eager ? "eager" : "lazy", decoding: "async" });
+    img.addEventListener("error", () => img.replaceWith(fallbackCover(book)), { once: true });
+    frame.append(img);
+    return frame;
   }
 
   function rating(book) {
@@ -255,7 +306,9 @@
         priceTag(book)
       ),
       el("div", { class: "card-actions" },
-        el("button", { type: "button", class: "btn btn-add", "data-add": book.id }),
+        el("button", { type: "button", class: "btn btn-add", "data-add": book.id },
+          icon("cart", 17), icon("check", 17), el("span", { class: "lbl" })
+        ),
         el("button", { type: "button", class: "icon-btn btn-wish", "data-wish": book.id }, icon("heart", 18))
       )
     );
@@ -276,7 +329,7 @@
       const out = !inCart && Shop.available(book.id) === 0;
       btn.disabled = out;
       btn.classList.toggle("is-in-cart", inCart);
-      btn.textContent = t(out ? "card.out" : inCart ? "card.inCart" : "card.add");
+      btn.querySelector(".lbl").textContent = t(out ? "card.out" : inCart ? "card.inCart" : "card.add");
       btn.setAttribute("aria-label", t(out ? "card.outAria" : inCart ? "card.inCartAria" : "card.addAria", { title: Shop.title(book) }));
     });
     root.querySelectorAll("[data-wish]").forEach((btn) => {
@@ -340,6 +393,10 @@
     titleFn = options.title || null;
     renderHeader();
     renderFooter();
+    // Page number above the page title, and the drawing in empty states.
+    const h1 = document.querySelector("main h1");
+    if (h1 && page !== "home") h1.before(folio());
+    document.querySelectorAll(".empty").forEach((box) => box.prepend(emptyArt()));
     Core.onLang(() => {
       render();
       updateBadges();
@@ -354,5 +411,5 @@
     Core.init();
   }
 
-  window.Site = { el, icon, cover, rating, priceTag, tags, bookCard, bookGrid, syncCards, addToCart, formatDate, setTitle, start };
+  window.Site = { el, icon, cover, rating, priceTag, tags, bookCard, bookGrid, syncCards, addToCart, formatDate, setTitle, start, folio, emptyArt };
 })();
