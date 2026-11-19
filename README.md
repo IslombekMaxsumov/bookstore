@@ -1,5 +1,7 @@
 # Varaq — online bookstore
 
+**Live site: https://islombekmaxsumov.github.io/bookstore/**
+
 Site #3 of my 10-websites course project. A multi-page bookstore in plain HTML, CSS and JavaScript (no framework, no build step, no backend).
 
 ## Pages
