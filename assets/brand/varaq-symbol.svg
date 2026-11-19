@@ -1,7 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Varaq">
-  <!-- A page with a folded corner and a bookmark ribbon; the ribbon's notch is a "V". -->
-  <path d="M9 3h22l8 8v33H9z" fill="#20211F"/>
-  <path d="M31 3v8h8z" fill="#DFDDD5"/>
-  <path d="M27 21h7M27 26.5h7M27 32h4.5" stroke="#F7F5F0" stroke-width="2.2" stroke-linecap="square"/>
-  <path d="M14 3h8v45l-4-5-4 5z" fill="#E34D35"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 84 104" width="84" height="104" role="img" aria-label="Varaq">
+  <path d="M6 98V47C6 27 20 13 40 5C60 13 74 27 74 47V98Z" transform="translate(6 4)" fill="#20211F"/>
+  <path d="M6 98V47C6 27 20 13 40 5C60 13 74 27 74 47V98Z" fill="#E34D35"/>
+  <path d="M13.5 90.5V48.5C13.5 32 25 21 40 14.2C55 21 66.5 32 66.5 48.5V90.5Z" fill="none" stroke="#F7F5F0" stroke-width="1.6"/>
+  <path d="M40.00 30.50L50.50 41.00L40.00 51.50L29.50 41.00ZM47.42 33.58L47.42 48.42L32.58 48.42L32.58 33.58Z" fill="#F7F5F0"/>
+  <circle cx="40" cy="41" r="2.8" fill="#E34D35"/>
+  <path d="M23 63h34M23 70h34M23 77h34M23 84h21" stroke="#F7F5F0" stroke-width="2.4" stroke-linecap="round"/>
 </svg>

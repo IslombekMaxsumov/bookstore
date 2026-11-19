@@ -28,7 +28,7 @@
   grid-template-areas: "brand tools" "search search" "nav nav" "prefs prefs";
 }
 .brand { grid-area: brand; display: inline-flex; padding: 4px 0; border-radius: 6px; }
-.brand img { height: 30px; width: auto; }
+.brand img { height: 38px; width: auto; }
 .header-search { grid-area: search; position: relative; }
 .header-search .input { padding-right: 48px; min-height: 44px; }
 .header-search button { position: absolute; right: 2px; top: 2px; width: 40px; height: 40px; border: 0; background: transparent; }
@@ -88,7 +88,8 @@
 /* ---------- footer ---------- */
 .site-footer { margin-top: 24px; background: var(--raised); border-top: 2px solid var(--ink); padding-block: 40px 20px; }
 .footer-grid { display: grid; gap: 32px; }
-.footer-logo img { height: 34px; width: auto; }
+.footer-logo { display: inline-block; }
+.footer-logo img { height: 56px; width: auto; }
 .footer-tagline { margin-top: 14px; max-width: 34ch; color: var(--ink-2); }
 .footer-grid h2 { display: flex; gap: 10px; align-items: baseline; font-size: 0.9375rem; font-weight: 800; margin-bottom: 12px; }
 .foot-num { font-size: 0.75rem; color: var(--accent-text); font-variant-numeric: tabular-nums; }

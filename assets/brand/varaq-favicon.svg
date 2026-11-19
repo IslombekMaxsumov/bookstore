@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Simplified symbol for browser tabs: no text lines, on a dark tile. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Varaq">
   <rect width="32" height="32" rx="7" fill="#20211F"/>
-  <path d="M7 5h13l5 5v17H7z" fill="#F7F5F0"/>
-  <path d="M20 5v5h5z" fill="#A5A79F"/>
-  <path d="M10.5 5h5v24l-2.5-3-2.5 3z" fill="#E34D35"/>
+  <g transform="translate(4.6 2.6) scale(0.285)">
+  <path d="M6 98V47C6 27 20 13 40 5C60 13 74 27 74 47V98Z" fill="#E34D35"/>
+  <path d="M40 24L57 41 40 58 23 41Z" fill="#F7F5F0"/><rect x="28" y="29" width="24" height="24" fill="#F7F5F0"/>
+  </g>
 </svg>

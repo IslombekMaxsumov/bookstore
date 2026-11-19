@@ -33,7 +33,7 @@ Demo promo codes: `KITOB10` (10% off), `TALABA15` (15% off from 150 000 so'm), `
 Run locally with any static server, for example `node ../_shared/serve.mjs . 5175`.
 
 ## Design
-- Brand: logo files in `assets/brand/` (a page with a folded corner and a bookmark ribbon whose notch is a "V"; the ribbon is also the tail of the "q" in the wordmark).
+- Brand: logo files in `assets/brand/`. The symbol is a book page shaped like the arched portals (peshtoq) of Samarkand, with a girih star in the arch window, lines of text and a second page behind it. The wordmark is Roboto Slab Bold turned into vector outlines; the footer lockup adds "KITOB DO'KONI · TOSHKENT".
 - Colours: warm paper, deep ink, vermilion (tokens in `css/base.css`, some darkened to pass WCAG AA; the original values are noted there).
 - Fonts: Roboto Slab (headlines) and Manrope (everything else), both with Cyrillic.
 - Signature detail: every page carries a page number like a printed book ("02 / 07"), and sections and checkout steps are numbered.

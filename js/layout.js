@@ -86,10 +86,12 @@
   /* ---------- logo ----------
      The real logo files (assets/brand). Both are in the page and CSS shows
      the one that fits the theme. */
-  function logo(cls) {
+  // file: "logo" (header) or "lockup" (footer, with "KITOB DO'KONI · TOSHKENT").
+  function logo(cls, file = "logo") {
+    const [w, h] = file === "logo" ? [195, 66] : [300, 80];
     return el("a", { class: cls, href: "index.html" },
-      el("img", { class: "logo-light", src: "assets/brand/varaq-logo.svg", alt: "Varaq", width: 113, height: 32 }),
-      el("img", { class: "logo-dark", src: "assets/brand/varaq-logo-dark.svg", alt: "Varaq", width: 113, height: 32 })
+      el("img", { class: "logo-light", src: `assets/brand/varaq-${file}.svg`, alt: "Varaq", width: w, height: h }),
+      el("img", { class: "logo-dark", src: `assets/brand/varaq-${file}-dark.svg`, alt: "Varaq", width: w, height: h })
     );
   }
 
@@ -214,7 +216,7 @@
     host.append(
       el("div", { class: "container footer-grid" },
         el("div", { class: "footer-about" },
-          logo("footer-logo"),
+          logo("footer-logo", "lockup"),
           el("p", { class: "footer-tagline", "data-i18n": "footer.tagline" })
         ),
         el("nav", { "aria-labelledby": "footShop" },
