@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Varaq</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#f3f6fb">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>
+    window.APP_NS = "bookstore";
+    try {
+      var savedTheme = localStorage.getItem("bookstore:theme");
+      document.documentElement.setAttribute("data-theme", savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script defer src="js/core.js"></script>
+  <script defer src="js/lang.js"></script>
+  <script defer src="js/books.js"></script>
+  <script defer src="js/shop.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/pages/catalog.js"></script>
+</head>
+<body data-page="catalog">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+
+  <main id="main" tabindex="-1" class="container page">
+    <h1 data-i18n="page.catalog"></h1>
+
+    <div class="catalog">
+      <button type="button" id="filtersToggle" class="btn btn-ghost filters-toggle" aria-expanded="false" aria-controls="filters">
+        <span data-i18n="filters.title"></span>
+        <span id="filterCount" class="count-pill"></span>
+      </button>
+
+      <aside id="filters" class="filters" aria-labelledby="filtersTitle">
+        <h2 id="filtersTitle" class="filters-title" data-i18n="filters.title"></h2>
+        <form id="filterForm" class="filter-form" novalidate>
+          <div class="field">
+            <label for="q" data-i18n="filters.search"></label>
+            <input id="q" name="q" type="search" class="input" autocomplete="off" data-i18n-placeholder="header.searchPh">
+          </div>
+
+          <fieldset>
+            <legend data-i18n="filters.category"></legend>
+            <div id="catBoxes" class="check-list"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend data-i18n="filters.lang"></legend>
+            <div class="check-list">
+              <label class="check"><input type="radio" name="lang" value="" checked> <span data-i18n="filters.any"></span></label>
+              <label class="check"><input type="radio" name="lang" value="uz"> <span data-i18n="blang.uz"></span></label>
+              <label class="check"><input type="radio" name="lang" value="ru"> <span data-i18n="blang.ru"></span></label>
+              <label class="check"><input type="radio" name="lang" value="en"> <span data-i18n="blang.en"></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend data-i18n="filters.price"></legend>
+            <div class="price-range">
+              <div class="field">
+                <label for="min" data-i18n="filters.min"></label>
+                <input id="min" name="min" type="number" inputmode="numeric" min="0" step="1000" class="input" placeholder="0">
+              </div>
+              <div class="field">
+                <label for="max" data-i18n="filters.max"></label>
+                <input id="max" name="max" type="number" inputmode="numeric" min="0" step="1000" class="input" placeholder="150000" aria-describedby="priceError">
+              </div>
+            </div>
+            <p id="priceError" class="field-error" aria-live="polite"></p>
+          </fieldset>
+
+          <fieldset>
+            <legend data-i18n="filters.more"></legend>
+            <div class="check-list">
+              <label class="check"><input type="checkbox" name="stock" value="1"> <span data-i18n="filters.stock"></span></label>
+              <label class="check"><input type="checkbox" name="sale" value="1"> <span data-i18n="filters.sale"></span></label>
+            </div>
+          </fieldset>
+
+          <button type="button" id="clearFilters" class="btn btn-ghost" data-i18n="filters.clear"></button>
+        </form>
+      </aside>
+
+      <section class="results" aria-labelledby="resultsCount">
+        <div class="results-bar">
+          <p id="resultsCount" class="results-count" role="status"></p>
+          <div class="field sort-field">
+            <label for="sort" data-i18n="sort.label"></label>
+            <select id="sort" name="sort" class="select">
+              <option value="popular" data-i18n="sort.popular"></option>
+              <option value="rating" data-i18n="sort.rating"></option>
+              <option value="newest" data-i18n="sort.newest"></option>
+              <option value="priceAsc" data-i18n="sort.priceAsc"></option>
+              <option value="priceDesc" data-i18n="sort.priceDesc"></option>
+              <option value="title" data-i18n="sort.title"></option>
+            </select>
+          </div>
+        </div>
+
+        <div id="grid"></div>
+
+        <div id="empty" class="empty" hidden>
+          <h2 data-i18n="empty.title"></h2>
+          <p data-i18n="empty.text"></p>
+          <button type="button" id="emptyClear" class="btn" data-i18n="filters.clear"></button>
+        </div>
+
+        <nav id="pager" class="pager" data-i18n-aria="pager.label"></nav>
+      </section>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+  <div id="toasts" class="toast-host"></div>
+</body>
+</html>

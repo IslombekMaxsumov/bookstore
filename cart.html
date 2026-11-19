@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Varaq</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#f3f6fb">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Apply the saved theme before the page is drawn, so it never flashes. -->
+  <script>
+    window.APP_NS = "bookstore";
+    try {
+      var savedTheme = localStorage.getItem("bookstore:theme");
+      document.documentElement.setAttribute("data-theme", savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script defer src="js/core.js"></script>
+  <script defer src="js/lang.js"></script>
+  <script defer src="js/books.js"></script>
+  <script defer src="js/shop.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/pages/cart.js"></script>
+</head>
+<body data-page="cart">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+
+  <main id="main" tabindex="-1" class="container page">
+    <h1 id="cartTitle" tabindex="-1" data-i18n="page.cart"></h1>
+    <p id="stockNote" class="notice" role="status" hidden data-i18n="cart.stockFixed"></p>
+
+    <div id="cartEmpty" class="empty" hidden>
+      <h2 data-i18n="cart.empty"></h2>
+      <p data-i18n="cart.emptyText"></p>
+      <a class="btn" href="catalog.html" data-i18n="home.browse"></a>
+    </div>
+
+    <div id="cartFull" class="cart-layout" hidden>
+      <section aria-labelledby="itemsTitle">
+        <h2 id="itemsTitle" class="items-title"></h2>
+        <ul id="cartLines" class="cart-lines"></ul>
+        <a href="catalog.html" class="back-link" data-i18n="cart.continue"></a>
+      </section>
+
+      <aside class="summary" aria-labelledby="summaryTitle">
+        <h2 id="summaryTitle" data-i18n="cart.summary"></h2>
+        <div id="freeBar" class="free-bar"></div>
+
+        <form id="promoForm" class="promo-form" novalidate>
+          <label for="promo" data-i18n="promo.label"></label>
+          <div class="promo-row">
+            <input id="promo" name="promo" class="input" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="promoHint promoMsg">
+            <button class="btn btn-ghost" type="submit" data-i18n="promo.apply"></button>
+          </div>
+          <p id="promoHint" class="hint"></p>
+          <p id="promoMsg" class="field-msg" role="status"></p>
+        </form>
+        <div id="appliedPromo" class="applied-promo"></div>
+
+        <dl id="totals" class="totals"></dl>
+        <a class="btn btn-block" href="checkout.html" data-i18n="cart.checkout"></a>
+      </aside>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+  <div id="toasts" class="toast-host"></div>
+</body>
+</html>

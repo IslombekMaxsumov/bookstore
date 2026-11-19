@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Varaq</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#f3f6fb">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Apply the saved theme before the page is drawn, so it never flashes. -->
+  <script>
+    window.APP_NS = "bookstore";
+    try {
+      var savedTheme = localStorage.getItem("bookstore:theme");
+      document.documentElement.setAttribute("data-theme", savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script defer src="js/core.js"></script>
+  <script defer src="js/lang.js"></script>
+  <script defer src="js/books.js"></script>
+  <script defer src="js/shop.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/pages/wishlist.js"></script>
+</head>
+<body data-page="wishlist">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+
+  <main id="main" tabindex="-1" class="container page">
+    <div class="page-head">
+      <h1 id="wishTitle" tabindex="-1" data-i18n="page.wishlist"></h1>
+      <p id="wishCount" class="page-sub"></p>
+    </div>
+    <div id="wishActions" class="page-actions">
+      <button id="allToCart" class="btn" type="button" data-i18n="wish.allToCart"></button>
+    </div>
+    <div id="wishGrid"></div>
+    <div id="wishEmpty" class="empty" hidden>
+      <h2 data-i18n="wish.empty"></h2>
+      <p data-i18n="wish.emptyText"></p>
+      <a class="btn" href="catalog.html" data-i18n="home.browse"></a>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+  <div id="toasts" class="toast-host"></div>
+</body>
+</html>

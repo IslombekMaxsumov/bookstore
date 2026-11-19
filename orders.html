@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Varaq</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#f3f6fb">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Apply the saved theme before the page is drawn, so it never flashes. -->
+  <script>
+    window.APP_NS = "bookstore";
+    try {
+      var savedTheme = localStorage.getItem("bookstore:theme");
+      document.documentElement.setAttribute("data-theme", savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/site.css">
+  <script defer src="js/core.js"></script>
+  <script defer src="js/lang.js"></script>
+  <script defer src="js/books.js"></script>
+  <script defer src="js/shop.js"></script>
+  <script defer src="js/layout.js"></script>
+  <script defer src="js/pages/orders.js"></script>
+</head>
+<body data-page="orders">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+
+  <main id="main" tabindex="-1" class="container page">
+    <h1 id="ordersTitle" tabindex="-1" data-i18n="page.orders"></h1>
+    <p id="placedNote" class="notice notice-ok" role="status" hidden></p>
+    <div id="ordersList" class="orders"></div>
+    <div id="ordersEmpty" class="empty" hidden>
+      <h2 data-i18n="orders.empty"></h2>
+      <p data-i18n="orders.emptyText"></p>
+      <a class="btn" href="catalog.html" data-i18n="home.browse"></a>
+    </div>
+    <p id="ordersNote" class="hint" data-i18n="orders.demoNote"></p>
+
+    <dialog id="cancelDialog" aria-labelledby="cancelTitle">
+      <form method="dialog">
+        <h2 id="cancelTitle"></h2>
+        <p data-i18n="orders.cancelText"></p>
+        <div class="dialog-actions">
+          <button value="keep" class="btn btn-ghost" data-i18n="orders.keep"></button>
+          <button value="cancel" class="btn btn-danger" data-i18n="orders.cancelYes"></button>
+        </div>
+      </form>
+    </dialog>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+  <div id="toasts" class="toast-host"></div>
+</body>
+</html>
